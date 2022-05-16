@@ -1,0 +1,595 @@
+@font-face {
+    font-family: "Score-Plane";
+    src: url('fonts/Score-Plane.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Score-Vertical";
+    src: url('fonts/Score-Vertical.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Score-Line"; 
+    src: url('fonts/Score-Line.woff') format('woff');
+}
+
+@font-face {
+    font-family: "AS-Condensed-90";
+    src: url('webFonts/AS-Condensed-90.woff2') format('woff2'), url('webFonts/AS-Condensed-90.woff') format('woff');
+}
+
+@font-face {
+    font-family: "AS-Condensed-130";
+    src: url('webFonts/AS-Condensed-130.woff2') format('woff2'), url('webFonts/AS-Condensed-130.woff') format('woff');
+}
+
+::selection, .cartinfotext::selection {
+  color: rgba(255,75,0,0.99);
+  background-color: none;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+element.style {
+    --cols: 22;
+    --itemHeight: 60px;
+    --resultsLen: 1;
+    --containHeight: 625px;
+}
+
+.title_wrap {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    width: 94.4vw;
+    height: 2.8vh;
+    background-color: #ffff75;
+    list-style-type: none;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    z-index: 999;
+}
+
+.title_wrap li {
+    display: inline-block;
+    font-size: 2.1vh;
+    padding: 1px;
+}
+
+a:link {
+    display: inline;
+    color: #000000;
+    font-family: "AS-Condensed-90";
+    font-size: 2.1vh;
+    line-height: 0vh;
+    letter-spacing: 0vh;
+    text-decoration: none;
+    z-index: 100000;
+}
+
+a {
+    color: #0e0e0e;
+    text-decoration: none;
+}
+
+.active, a:hover {
+    color: #0e0e0e;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #98ff47;
+}
+
+a:visited {
+    color: #000000;
+}
+
+.button {
+    display: inline;
+    text-align: center;
+    cursor: pointer;
+    background-color: #000000;
+    border: none;
+    color: #FFFFFF;
+    font-family: "AS-Condensed-130";
+    font-size: 2.1vh;
+    line-height: 1vh;
+    letter-spacing: 0vh;
+    text-decoration: none;
+    z-index: 100000;
+}
+
+.button:hover {
+  text-decoration: underline;
+  color: #FFFFFF;
+}
+
+.button:active {
+  color: #FFFFFF;
+}
+
+.button:visited {
+  color: #FFFFFF;
+}
+
+
+/*page*/
+.page {
+    top: 5.6vh;
+    height: auto;
+    margin: 0px auto;
+    text-align: left; 
+    padding-left: 14.5rem;
+    padding-right: 13rem;
+    padding-bottom: 1rem;
+    position: relative; 
+    overflow: hidden;
+  }
+
+.page .page-inside {
+    overflow: hidden;
+    width: calc(100% - 0mm - 0mm);
+    height: calc(100% - 0mm - 0mm); 
+  }
+
+
+  
+/*plane*/
+.setchars .plane {
+    font-family: "Score-Plane";
+    color: #2151ff;
+    width: 60px;
+    height: 60px;
+    box-shadow: 1px 0 0 0 #0e0e0e, 0 1px 0 0 #0e0e0e, 1px 1px 0 0 #0e0e0e, 1px 0 0 0 #0e0e0e inset, 0 1px 0 0 #0e0e0e inset;
+    float: left;
+    text-align: center;
+    font-size: 25px;
+    display: table;
+  }
+
+.setchars .plane span {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer; 
+  }
+
+.setchars .plane:hover {
+    background: #2151ff;
+    color: #ffffff; 
+  }
+
+.setchars .plane[data-title]:hover:after, .setchars .plane[data-title]:hover:before {
+    opacity: 1;
+    transition: all 0.3s ease 0.5s;
+    visibility: visible; 
+  }
+
+.setchars .plane[data-title]:after {
+    content: attr(data-title);
+    background-color: #ffffff;
+    color: #2151ff;
+    position: absolute;
+    left: calc(-100% + 0px);
+    width: calc(200% - 0px);
+    height: calc(200% - 0px);
+    opacity: 0;
+    padding: 0px;
+    margin-left: 0px;
+    margin-top: 0%;
+    z-index: 99998;
+    visibility: hidden;
+    box-shadow: 1px 0 0 0 #0e0e0e, 0 1px 0 0 #0e0e0e, 1px 1px 0 0 #0e0e0e, 1px 0 0 0 #0e0e0e inset, 0 1px 0 0 #0e0e0e inset;
+    font-size: 14px;
+    font-family: "Score-Plane";
+    text-align: left; 
+  }
+
+.setchars .plane[data-title] {
+    position: relative; 
+  }
+
+.setchars .plane[data-title]:before {
+    opacity: 0;
+    visibility: hidden;
+    content: attr(data-char);
+    font-size: 80px;
+    position: absolute;
+    color: #2151ff;
+    z-index: 99999;
+    text-align: center;
+    left: calc(-100% + 0px);
+    width: 200%;
+    height: 200%;
+    margin-top: 0%;
+    line-height: 150%;
+    overflow: hidden; 
+  }
+
+
+
+
+  
+  /*line*/
+.setchars .line {
+    font-family: "Score-Line";
+    color: #ff1d00;
+    background-color: #ffffff;
+    width: 60px;
+    height: 60px;
+    box-shadow: 1px 0 0 0 #0e0e0e, 0 1px 0 0 #0e0e0e, 1px 1px 0 0 #0e0e0e, 1px 0 0 0 #0e0e0e inset, 0 1px 0 0 #0e0e0e inset;
+    float: left;
+    text-align: center;
+    font-size: 25px;
+    display: table;
+  }
+
+.setchars .line span {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer; 
+  }
+
+.setchars .line:hover {
+    background-color: #ff1d00;
+    color: #ffffff; 
+  }
+
+.setchars .line[data-title]:hover:after, .setchars .line[data-title]:hover:before {
+    opacity: 1;
+    transition: all 0.3s ease 0.5s;
+    visibility: visible; 
+  }
+
+.setchars .line[data-title]:after {
+    content: attr(data-title);
+    background-color: #ffffff;
+    color: #ff1d00;
+    position: absolute;
+    left: calc(-100% + 0px);
+    width: calc(200% - 0px);
+    height: calc(200% - 0px);
+    opacity: 0;
+    padding: 0px;
+    margin-left: 0px;
+    margin-top: 0%;
+    z-index: 99998;
+    visibility: hidden;
+    box-shadow: 1px 0 0 0 #0e0e0e, 0 1px 0 0 #0e0e0e, 1px 1px 0 0 #0e0e0e, 1px 0 0 0 #0e0e0e inset, 0 1px 0 0 #0e0e0e inset;
+    font-size: 14px;
+    font-family: "Score-Line";
+    text-align: left; 
+  }
+
+.setchars .line[data-title] {
+    position: relative; 
+  }
+
+.setchars .line[data-title]:before {
+    opacity: 0;
+    visibility: hidden;
+    content: attr(data-char);
+    font-size: 80px;
+    position: absolute;
+    color: #ff1d00;
+    z-index: 99999;
+    text-align: center;
+    left: calc(-100% + 0px);
+    width: 200%;
+    height: 200%;
+    margin-top: 0%;
+    line-height: 150%;
+    overflow: hidden; 
+  }
+
+
+
+
+  
+  /*vertical*/
+.setchars .vertical {
+    font-family: "Score-Vertical";
+    color: #9b2eff; 
+    background-color: #ffffff;
+    width: 60px;
+    height: 60px;
+    box-shadow: 1px 0 0 0 #0e0e0e, 0 1px 0 0 #0e0e0e, 1px 1px 0 0 #0e0e0e, 1px 0 0 0 #0e0e0e inset, 0 1px 0 0 #0e0e0e inset;
+    float: left;
+    text-align: center;
+    font-size: 25px;
+    display: table;
+    writing-mode: vertical-rl;
+  }
+
+.setchars .vertical span {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer; 
+  }
+
+.setchars .vertical:hover {
+    background-color: #9b2eff;
+    color: #ffffff; 
+  }
+
+.setchars .vertical[data-title]:hover:after, .setchars .vertical[data-title]:hover:before {
+    opacity: 1;
+    transition: all 0.3s ease 0.5s;
+    visibility: visible; 
+  }
+
+.setchars .vertical[data-title]:after {
+    content: attr(data-title);
+    background-color: #ffffff;
+    color: #9b2eff;
+    position: absolute;
+    left: calc(-100% + 0px);
+    width: calc(200% - 0px);
+    height: calc(200% - 0px);
+    opacity: 0;
+    padding: 0px;
+    margin-left: 0px;
+    margin-top: 0%;
+    z-index: 99998;
+    visibility: hidden;
+    box-shadow: 1px 0 0 0 #0e0e0e, 0 1px 0 0 #0e0e0e, 1px 1px 0 0 #0e0e0e, 1px 0 0 0 #0e0e0e inset, 0 1px 0 0 #0e0e0e inset;
+    font-size: 14px;
+    font-family: "Score-Vertical";
+    text-align: left; 
+    writing-mode: vertical-rl;
+  }
+
+.setchars .vertical[data-title] {
+    position: relative; 
+  }
+
+.setchars .vertical[data-title]:before {
+    opacity: 0;
+    visibility: hidden;
+    content: attr(data-char);
+    font-size: 80px;
+    position: absolute;
+    color: #9b2eff;
+    z-index: 99999;
+    text-align: center;
+    left: calc(-100% + 0px);
+    width: 200%;
+    height: 200%;
+    margin-top: 100%;
+    line-height: 150%;
+    overflow: hidden; 
+    writing-mode: vertical-rl;
+  }
+
+
+
+
+  /*menu*/
+.menu {
+    font-family: "AS-Condensed-90";
+    color: #0e0e0e;
+    background-color: #ffff68;
+    font-size: 17px;
+    line-height: 1; 
+    position: relative;
+    text-align: left;
+    align-items: center;
+    height: 6vh;
+    padding: 1rem;
+    padding-bottom: 1rem;
+  }
+
+.menu-item {
+    font-family: "AS-Condensed-90";
+    color: #0e0e0e;
+    font-size: 17px;
+    line-height: 1; 
+    position: relative;
+    text-align: left;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.2rem;
+  }
+
+.menu-item:hover {
+    cursor: pointer; 
+  }
+
+input[type=range]::-moz-focus-outer {
+  border: 0; }
+
+input[type=range] {
+  max-width: 100%;
+  -webkit-appearance: none;
+  /* Hides the slider so that custom slider can be made */
+  width: 100%;
+  /* Specific width is requi#0e0e0e for Firefox. */
+  background: transparent;
+  /* Otherwise white in Chrome */
+  margin: 0;
+  margin-top: 0.5rem; }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; }
+
+input[type=range]:focus {
+  outline: none;
+  /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */ }
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent; }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1rem;
+  width: 1rem;
+  border: 0 !important;
+  border-radius: 1rem;
+  background: #0e0e0e;
+  cursor: pointer; }
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 1rem;
+  background: #0e0e0e;
+  cursor: pointer; }
+
+input[type=range]::-ms-thumb {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 1rem;
+  background: #0e0e0e;
+  cursor: pointer; }
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 1rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0); }
+
+input[type=range]::-moz-range-track {
+  height: 1;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0); }
+
+/*.template-font article.col3 {
+    -moz-column-count: 3;
+     column-count: 3; }
+    
+.template-font article.col2 {
+    -moz-column-count: 2;
+     column-count: 2; }
+*/   
+
+
+
+
+@media (min-width: 901px) {
+html {
+  font-size: 125%; } }
+
+@media (min-width: 601px) and (max-width: 900px) {
+html {
+  font-size: 100%; } }
+
+@media (max-width: 600px) {
+html, body {
+  font-size: 100%; 
+  line-height: 1; }
+  }
+
+
+  .invisible {
+    visibility: hidden; 
+  }
+
+  article {
+    overflow: hidden;
+    color: #0e0e0e;
+    background-color: #ffffff;
+    padding: 0.2rem;
+    position: relative; }
+  article:focus {
+    outline: 0; }
+  article .button {
+    background-color: #2151ff; }
+  article strong {
+    font-weight: bold; }
+  article p {
+    margin-bottom: 1em; }
+
+
+  .menu-item {
+    margin-right: 0.5rem; }
+
+  .inner {
+    top: 5.6vh;
+      /*background-color: #9dff3a;*/
+    float: right;
+    padding: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    position: relative; }
+
+@-moz-document url-prefix() {
+  .divider.first {
+    display: visible;
+    border-bottom: 0.1rem solid;
+    margin-top: -0.75rem; } }
+
+  input[type=range] {
+    visibility: visible; }
+
+  .divider {
+    border-bottom: 0.1rem solid; }
+  .divider.first {
+    margin-top: -0.9rem; }   
+  .mobile-divider {
+    display: visible; 
+  }
+  .font-menu .font-menu-icon {
+    font-family: "AS-Condensed-90";
+    color: #0e0e0e;
+    font-size: 17px;
+    line-height: 1; 
+    margin-bottom: 10rem; }
+  .font-menu .align {
+    cursor: pointer; }
+  .font-menu .align.disabled {
+    color: #2151ff;
+    cursor: auto; }
+  .font-menu .font-menu-icon:hover {
+    cursor: pointer; 
+    text-decoration: underline; }
+
+
+
+
+  input[type=range]::-webkit-slider-thumb {
+    background-color:#0e0e0e;
+  }
+  input[type=range]::-ms-thumb {
+    background-color:#0e0e0e;
+  }
+  input[type=range]::-moz-range-thumb {
+    background-color:#0e0e0e;
+    border:0;
+  }
+
+  /*
+  <div class="inner">
+	<article style="font-family:Score-Plane; line-height: 0.98; letter-spacing: -0.01; border:1px solid #2151ff; " contenteditable="true" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+		00:03 (light on)<br>  00:04 We’re home!<br>  00:08 (indoor door closed)<br>  00:12 Yes, We’re back.<br>
+	</article>
+</div>
+*/
+
+/*    <script>
+		window.breakpoints = [{"breakpoint":7000,"columns":1},{"breakpoint":3000,"columns":2},{"breakpoint":1600,"columns":3},{"breakpoint":912,"columns":4}];
+	</script>
+*/
+
+
+
+::selection, .inputGroup::selection{
+  color:rgba(255,75,0,0.99);
+  background-color:none;
+}
+
+::-moz-selection, .inputGroup::-moz-selection{
+  color:rgba(255,75,0,0.99);
+  background-color:none;
+}
